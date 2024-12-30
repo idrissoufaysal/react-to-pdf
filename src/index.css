@@ -1,68 +1,47 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+@layer base {
+  body {
+    @apply bg-gradient-to-br from-blue-50 to-indigo-50;
   }
-  a:hover {
-    color: #747bff;
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white bg-opacity-70 backdrop-blur-lg;
   }
-  button {
-    background-color: #f9f9f9;
+  
+  .btn-primary {
+    @apply px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-lg 
+           hover:from-blue-600 hover:to-indigo-600 transform hover:scale-105 
+           transition-all duration-200 shadow-md hover:shadow-lg;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg 
+           hover:from-green-600 hover:to-emerald-600 transform hover:scale-105 
+           transition-all duration-200 shadow-md hover:shadow-lg;
+  }
+
+  .search-input {
+    @apply w-full px-4 py-3 pl-12 rounded-xl border-2 border-gray-200 
+           focus:border-blue-400 focus:ring-2 focus:ring-blue-200 
+           transition-all duration-200 bg-white bg-opacity-80 backdrop-blur-sm;
+  }
+
+  .table-header {
+    @apply bg-gradient-to-r from-gray-50 to-gray-100 text-gray-700 font-semibold 
+           py-4 px-6 rounded-t-lg border-b border-gray-200;
+  }
+
+  .table-row {
+    @apply hover:bg-blue-50 transition-colors duration-150 border-b border-gray-100 
+           last:border-none;
+  }
+
+  .table-cell {
+    @apply py-4 px-6;
   }
 }

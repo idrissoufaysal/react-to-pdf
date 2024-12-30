@@ -1,0 +1,85 @@
+{
+  "utilisateurs": [
+    {
+      "id": "1",
+      "nom": "Dubois",
+      "prenom": "Marie",
+      "debutConge": "2024-07-01",
+      "finConge": "2024-07-21",
+      "salaires": [
+        {
+          "tache": "Développement",
+          "montants": [3000, 3000, 3000, 3200, 3200, 3200, 3200, 3200, 3200, 3400, 3400, 3400]
+        },
+        {
+          "tache": "Formation",
+          "montants": [500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500]
+        }
+      ],
+      "signature": ""
+    },
+       {
+      "id": "2",
+      "nom": "Dubois",
+      "prenom": "Marie",
+      "debutConge": "2024-07-01",
+      "finConge": "2024-07-21",
+      "salaires": [
+        {
+          "tache": "Développement",
+          "montants": [3000, 3000, 3000, 3200, 3200, 3200, 3200, 3200, 3200, 3400, 3400, 3400]
+        },
+        {
+          "tache": "Formation",
+          "montants": [500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500]
+        }
+      ],
+      "signature": ""
+    },   {
+      "id": "3",
+      "nom": "Dubois",
+      "prenom": "Marie",
+      "debutConge": "2024-07-01",
+      "finConge": "2024-07-21",
+      "salaires": [
+        {
+          "tache": "Développement",
+          "montants": [3000, 3000, 3000, 3200, 3200, 3200, 3200, 3200, 3200, 3400, 3400, 3400]
+        },
+        {
+          "tache": "Formation",
+          "montants": [500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500]
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "id": "4",
+      "nom": "Martin",
+      "prenom": "Pierre",
+      "debutConge": "2024-08-01",
+      "finConge": "2024-08-21",
+      "salaires": [
+        {
+          "tache": "Gestion de projet",
+          "montants": [4000, 4000, 4000, 4200, 4200, 4200, 4200, 4200, 4200, 4400, 4400, 4400]
+        }
+      ],
+      "signature": ""
+    },  
+    {
+      "id": "5",
+      "nom": "ali",
+      "prenom": "Pierre",
+      "debutConge": "2024-08-01",
+      "finConge": "2024-08-21",
+      "salaires": [
+        {
+          "tache": "Gestion de projet",
+          "montants": [4000, 4000, 4000, 4200, 4200, 4200, 4200, 4200, 4200, 4400, 4400, 4400]
+        }
+      ],
+      "signature": "dsfsfwrfe5wf4e2rf4654"
+    }
+  ]
+}
