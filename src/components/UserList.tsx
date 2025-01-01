@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Search, FileText } from 'lucide-react';
-import type { Utilisateur } from '../types';
+import type { User } from '../types';
 import { PDFPreview } from './PDFPreview';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 
 interface UserListProps {
-  users: Utilisateur[];
-  onDownloadPDF: (user: Utilisateur) => void;
+  users: User[];
+  onDownloadPDF: (user: User) => void;
 }
 
 export function UserList({ users, onDownloadPDF }: UserListProps) {
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedUser, setSelectedUser] = useState<Utilisateur | null>(null);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
-  const filteredUsers = users.filter(user => 
+  const filteredUsers = users?.filter(user => 
     user.nom.toLowerCase().includes(searchTerm.toLowerCase()) ||
     user.prenom.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -25,7 +25,7 @@ export function UserList({ users, onDownloadPDF }: UserListProps) {
         <Search className="absolute left-4 top-3.5 text-black" size={20} />
         <input
           type="text"
-          placeholder="Rechercher un utilisateur..."
+          placeholder="Rechercher un User..."
           className="search-input"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -63,7 +63,7 @@ export function UserList({ users, onDownloadPDF }: UserListProps) {
 
           {filteredUsers.length === 0 && (
             <div className="py-8 text-center text-gray-500">
-              Aucun utilisateur trouvé
+              Aucun User trouvé
             </div>
           )}
         </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { saveAs } from 'file-saver';
 import JSZip from 'jszip';
 import { Users, FileDown } from 'lucide-react';
@@ -6,19 +6,28 @@ import { UserList } from './components/UserList';
 import { PDFDocument } from './components/PDFGenerator';
 import { pdf } from '@react-pdf/renderer';
 import userData from './data/users.json';
-import type { Utilisateur } from './types';
-
+import type { User } from './types';
 
 function App() {
-  const [users] = React.useState<Utilisateur[]>(userData.utilisateurs);
+  const [users,setUsers] =useState<User[]>(userData.users);
 
-  const generatePDF = async (user: Utilisateur) => {
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await fetch('/data/user.json');
+      const user = await res.json();
+      setUsers(user);
+    };
+  
+    fetchUser(); // Appel de la fonction fetchUser
+  }, []); // Le
+
+  const generatePDF = async (user: User) => {
     const doc = <PDFDocument user={user} />;
     const blob = await pdf(doc).toBlob();
     return blob;
   };
 
-  const downloadSinglePDF = async (user: Utilisateur) => {
+  const downloadSinglePDF = async (user: User) => {
     const blob = await generatePDF(user);
     saveAs(blob, `fiche_${user.nom}_${user.prenom}.pdf`);
   };
