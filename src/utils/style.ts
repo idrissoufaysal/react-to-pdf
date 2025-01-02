@@ -22,8 +22,13 @@ export const styles = StyleSheet.create({
       fontFamily: "Helvetica-Bold",
     },
     table: {
-      width: "100%",
-      borderColor: "1px solid #f3f4f6",
+        width: "100%",
+        textAlign: "center",
+        borderCollapse: "collapse",
+        border: "1px solid black",
+        padding: 5,
+        fontSize: 15,
+        borderRadius:8,
       margin: "20px 0",
     },
     tableHeader: {
@@ -31,6 +36,12 @@ export const styles = StyleSheet.create({
     },
     td: {
       padding: 6,
+      borderCollapse: "collapse",
+      border:"1px solid black",
+    },
+    tr:{
+        borderCollapse: "collapse",
+        border:"1px solid black",
     },
     signature: {
       marginTop: 30,

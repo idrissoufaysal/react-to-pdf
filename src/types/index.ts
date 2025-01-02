@@ -1,4 +1,4 @@
-export enum Mois {
+export enum _Mois {
   Janvier,
   Février,
   Mars,
@@ -13,25 +13,44 @@ export enum Mois {
   Décembre,
 }
 
-// Typage des éléments du tableau `salaires`
-export type Salaire = {
-  tache: string;  // Nom de la tâche (par exemple, "aa", "d", "c")
-  montant: number; // Montant pour cette tâche
-  mois: Mois | string; // Le mois associé à ce salaire
-};
+export const MoisArray = [
+  "Janvier",
+  "Février",
+  "Mars",
+  "Avril",
+  "Mai",
+  "Juin",
+  "Juillet",
+  "Août",
+  "Septembre",
+  "Octobre",
+  "Novembre",
+  "Décembre",
+];
 
-// Typage de l'objet `User`
-export type User = {
-  id: string; // L'ID de l'utilisateur
-  nom: string; // Le nom de l'utilisateur
-  prenom: string; // Le prénom de l'utilisateur
-  debutConge: string; // La date de début du congé (format "YYYY-MM-DD")
-  finConge: string; // La date de fin du congé (format "YYYY-MM-DD")
-  salaires: Salaire[]; // Tableau d'objets `Salaire` pour les différents mois et tâches
-  signature: string; // Signature de l'utilisateur (sous forme de chaîne de caractères)
-  dateAjout: string; // La date d'ajout ou de modification des informations (format "YYYY-MM-DD")
-  logo ?:string
-};
+interface Mois {
+  mois: string;
+  montant: number;
+}
+
+interface Salaire {
+  tache: string;
+  montant_par_moi: Mois[];
+}
+
+export interface User {
+  id: string;
+  nom: string;
+  prenom: string;
+  debutConge: string;
+  finConge: string;
+  logo?: string;
+  salaires: Salaire[];
+  signature?: string;
+  lieu: string;
+  tableau?: string
+}
+
 
 export type TabeItem = {
   nomMetier: string;

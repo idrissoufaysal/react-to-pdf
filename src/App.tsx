@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { saveAs } from 'file-saver';
 import JSZip from 'jszip';
 import { Users, FileDown } from 'lucide-react';
@@ -7,10 +7,20 @@ import { PDFDocument } from './components/PDFGenerator';
 import { pdf } from '@react-pdf/renderer';
 import userData from './data/users.json';
 import type { User } from './types';
+import { generatePDF } from './utils/tableau';
+import React from 'react';
 
 function App() {
-  const [users,setUsers] =useState<User[]>(userData.users);
+  const [users,setUsers] =useState<User[]>(userData);
 
+  const printRefs = React.useMemo(() => {
+    const refs: { [key: string]: React.RefObject<HTMLElement> } = {};
+    users.forEach((user) => {
+      refs[user.id] = React.createRef();
+    });
+    return refs;
+  }, [users]);
+  
   useEffect(() => {
     const fetchUser = async () => {
       const res = await fetch('/data/user.json');
@@ -34,14 +44,20 @@ function App() {
 
   const downloadAllPDFs = async () => {
     const zip = new JSZip();
-    
+  
     for (const user of users) {
-      const blob = await generatePDF(user);
-      zip.file(`fiche_${user.nom}_${user.prenom}.pdf`, blob);
+      const pdfBlob = await generatePDF(user);
+      if (pdfBlob) {
+        zip.file(`fiche_${user.nom}_${user.prenom}.pdf`, pdfBlob);
+      }
     }
-    
-    const zipBlob = await zip.generateAsync({ type: 'blob' });
-    saveAs(zipBlob, 'fiches_utilisateurs.zip');
+  
+    try {
+      const zipBlob = await zip.generateAsync({ type: "blob" });
+      saveAs(zipBlob, "fiches_utilisateurs.zip");
+    } catch (error) {
+      console.error("Erreur lors de la génération du fichier ZIP :", error);
+    }
   };
 
   return (

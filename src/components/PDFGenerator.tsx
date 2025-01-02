@@ -1,7 +1,6 @@
 import { Document, Page, Text, View, Image, Font } from '@react-pdf/renderer';
 import { Table, TD, TH, TR } from "@ag-media/react-pdf-table";
-import { Mois, type User } from '../types';
-import { generateTableData, MoisArray } from '../utils/tableau';
+import {type User ,MoisArray} from '../types';
 import { styles } from '../utils/style';
 
 // Enregistrer la police
@@ -16,15 +15,10 @@ interface PDFDocumentProps {
 
 export function PDFDocument({ user }: PDFDocumentProps) {
 
-  const moisArray = Object.keys(Mois).filter((key) => isNaN(Number(key))); // En-têtes des mois
+ // const moisArray = Object.keys(Mois).filter((key) => isNaN(Number(key))); // En-têtes des mois
 
-  const m = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juiellet", "Août",
-    "Septembre",
-    "Octobre",
-    "Novembre",
-    "Décembre",]
 
-  const table = generateTableData(user);
+  // const table = generateTableData(user);
 
   return (
     <Document>
@@ -48,43 +42,32 @@ export function PDFDocument({ user }: PDFDocumentProps) {
           </Text>
         </View>
 
-        {/* Render the table */}
-        <Table style={{ fontSize: 10 }}>
+{ /********************** * Render the table ********************************************************************/}
+        <Table style={{ width: "100%", textAlign: "center", border: "1px solid #ccc" }}>
+      <TR>
+        <TH>Tâche</TH>
+        {MoisArray.map((mois, index) => (
+          <TH key={index}>{mois}</TH>
+        ))}
+      </TR>
+      {user.salaires.map((salaire, index) => {
+        const row = MoisArray.map((mois) => {
+          const dataMois = salaire.montant_par_moi.find((m) => m.mois === mois);
+          return dataMois ? dataMois.montant : 0;
+        });
 
-          <TH>
-            <TD>
-              Tâche
-            </TD>
-
-            {m.map((mois, index) => (
-              <TD>
-                <TR key={index}>
-                  <TD>
-                    {mois}
-                  </TD>
-                </TR>
-              </TD>
+        return (
+          <TR key={index}>
+            <TD>{salaire.tache}</TD>
+            {row.map((montant, idx) => (
+              <TD key={idx}>{montant} €</TD>
             ))}
-          </TH>
+          </TR>
+        );
+      })}
+    </Table>
+{ /********************** * Render the table ********************************************************************/}
 
-          {user.salaires.map((task, index) => {
-            // Initialize row with task name
-            const row = m.map((mois) => {
-              // Find the salary for the current task and month
-              const salaire = user.salaires.find((s) => s.mois === mois && s.tache === task.tache);
-              return salaire ? salaire.montant : 0; // Display 0 if no salary is found for that month
-            });
-
-            return (
-              <TR key={index}>
-                <TD>{task.tache}</TD>
-                {row.map((montant, idx) => (
-                  <TD key={idx}>{montant === 0 ? '0 €' : `${montant} €`}</TD>
-                ))}
-              </TR>
-            );
-          })}
-        </Table>
 
         <View style={{ marginTop: 20 }}>
           <Text style={{ fontSize: 14 }}>Fait a {new Date(user?.dateAjout).toLocaleDateString()}</Text>
